@@ -17,9 +17,9 @@ return [0, 1].
 
 ## Solution
 
-### Brute Force
-* Time complexity : O(n^2). For each element, we try to find its complement by looping through the rest of array which takes O(n)O(n) time. Therefore, the time complexity is O(n^2).
-* Space complexity : O(1).
+### 1. Brute Force
+
+The brute force approach is simple. Loop through each element xx and find if there is another value that equals to target - x.
 
 ```Java
 class Solution {
@@ -35,3 +35,10 @@ class Solution {
     }
 }
 ```
+
+**Complexity Analysis**
+
+* Time complexity : O(n^2). For each element, we try to find its complement by looping through the rest of array which takes O(n) time. Therefore, the time complexity is O(n^2).
+* Space complexity : O(1).
+
+### 2. Two-pass Hash Table
