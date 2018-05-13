@@ -15,9 +15,13 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
 
+## Tag
+
+Array, Hash Table, Sort, Two Pointers
+
 ## Solution
 
-### 1. Brute Force
+### 1. Brute Force [Array]
 
 The brute force approach is simple. Loop through each element x and find if there is another value that equals to target - x.
 
@@ -41,7 +45,7 @@ class Solution {
 * Time complexity : O(n^2). For each element, we try to find its complement by looping through the rest of array which takes O(n) time. Therefore, the time complexity is O(n^2).
 * Space complexity : O(1).
 
-### 2. Two-pass Hash Table
+### 2. Two-pass Hash Table [Hash Table]
 
 To improve our run time complexity, we need a more efficient way to check if the complement exists in the array. If the complement exists, we need to look up its index. What is the best way to maintain a mapping of each element in the array to its index? A hash table.
 
@@ -72,7 +76,7 @@ class Solution {
 * Time complexity : O(n). We traverse the list containing n elements exactly twice. Since the hash table reduces the look up time to O(1), the time complexity is O(n).
 * Space complexity : O(n). The extra space required depends on the number of items stored in the hash table, which stores exactly n elements.
 
-### 3. One-pass Hash Table
+### 3. One-pass Hash Table [Hash Table]
 
 It turns out we can do it in one-pass. While we iterate and inserting elements into the table, we also look back to check if current element's complement already exists in the table. If it exists, we have found a solution and return immediately.
 
@@ -96,3 +100,67 @@ class Solution {
 
 * Time complexity : O(n). We traverse the list containing n elements only once. Each look up in the table costs only O(1) time.
 * Space complexity : O(n). The extra space required depends on the number of items stored in the hash table, which stores at most n elements.
+
+### 3. Sort and Search [Sort, Two Pointers]
+
+```Java
+class Solution {
+
+    final static int RESULT_SIZE = 2;
+    final static int RESULT_INDEX1 = 0;
+    final static int RESULT_INDEX2 = 1;
+
+    public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length < RESULT_SIZE) {
+            throw new IllegalArgumentException("No two sum solution");
+        }
+
+        int[] original = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            original[i] = nums[i];
+        }
+
+        Arrays.sort(nums);
+        int start = 0;
+        int end = nums.length - 1;
+        int num1 = -1;
+        int num2 = -1;
+        while (start != end) {
+            if (nums[start] == target - nums[end]) {
+                num1 = nums[start];
+                num2 = nums[end];
+                break;
+            } else if (nums[start] < target - nums[end]) {
+                start++;
+            } else {
+                end--;
+            }
+        }
+
+        if (start == end) {
+            throw new IllegalArgumentException("No two sum solution");
+        }
+
+        // Find num1, num2 in original array and record the index
+        int[] result = new int[RESULT_SIZE];
+        result[RESULT_INDEX1] = -1;
+        result[RESULT_INDEX2] = -1;
+        for (int i = 0; i < original.length; i++) {
+            if (original[i] == num1 || original[i] == num2) {
+                if (result[RESULT_INDEX1] == -1) {
+                    result[RESULT_INDEX1] = i;
+                } else {
+                    result[RESULT_INDEX2] = i;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+}
+```
+
+**Complexity Analysis**
+
+* Time complexity : O(nlogn). The sorting algorithm takes O(nlogn) time.
+* Space complexity : O(n).
