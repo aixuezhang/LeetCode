@@ -18,6 +18,10 @@ Explanation: 342 + 465 = 807.
 
 Linked List
 
+## Enlightenment
+
+第一个自己尝试不看答案、问题类别写的code，感觉在开始写之前，先要理解题意，抓出主干，然后想一些比较典型的test case，再下手的话可以涵盖大多数的情况
+
 ## My #1 Attempt (05/13/18)
 
 ```Java
@@ -31,14 +35,11 @@ Linked List
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if (l1 == null && l2 == null) {
-            throw new IllegalArgumentException("No solution");
-        }
-
         int carry = 0;
         ListNode result = new ListNode(-1);
         ListNode current = new ListNode(carry);
         result.next = current;
+
         while (l1 != null || l2 != null) {
             int valOfL1 = l1 == null ? 0 : l1.val;
             int valOfL2 = l2 == null ? 0 : l2.val;

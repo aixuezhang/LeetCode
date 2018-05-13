@@ -19,6 +19,10 @@ return [0, 1].
 
 Array, Hash Table, Sort, Two Pointers
 
+## Enlightenment
+
+Hash Table是mapping array及其index的最好的data structure
+
 ## Solution
 
 ### 1. Brute Force [Array]
