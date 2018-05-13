@@ -16,9 +16,9 @@ Explanation: 342 + 465 = 807.
 
 ## Tag
 
-Array, Hash Table, Sort, Two Pointers
+Linked List
 
-## #1 Attempt
+## My #1 Attempt (05/13/18)
 
 ```Java
 /**
